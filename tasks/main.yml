@@ -1,0 +1,19 @@
+---
+- name: Create golang package directory
+  file:
+    path: '{{golang_package_cache}}'
+    state: directory
+  become: true
+- name: Download golang
+  get_url:
+    url: 'https://dl.google.com/go/go{{golang_version}}.linux-amd64.tar.gz'
+    dest: '{{golang_package_cache}}/go{{golang_version}}.linux-amd64.tar.gz'
+    checksum: '{{golang_checksum}}'
+  become: true
+- name: Install golang
+  unarchive:
+    src: '{{golang_package_cache}}/go{{golang_version}}.linux-amd64.tar.gz'
+    dest: /usr/local
+    remote_src: true
+    creates: /usr/local/bin/go
+  become: true
