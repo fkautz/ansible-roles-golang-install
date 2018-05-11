@@ -21,7 +21,9 @@
   lineinfile:
     path: /etc/profile
     line: GOROOT=/usr/local/go
+  become: true
 - name: Add go to PATH in global profile
   lineinfile:
     path: /etc/profile
     line: PATH=$PATH:/usr/local/bin/go
+  become: true
