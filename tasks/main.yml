@@ -17,3 +17,11 @@
     remote_src: true
     creates: /usr/local/bin/go
   become: true
+- name: Add GOROOT to global profile
+  lineinfile:
+    path: /etc/profile
+    line: GOROOT=/usr/local/go
+- name: Add go to PATH in global profile
+  lineinfile:
+    path: /etc/profile
+    line: PATH=$PATH:/usr/local/bin/go
